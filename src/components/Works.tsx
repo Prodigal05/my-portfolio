@@ -12,6 +12,8 @@ import asana from "@/assets/projects/asana-crm.png";
 import clientOnboarding from "@/assets/projects/client-onboarding.png";
 import heygenAvatar from "@/assets/projects/heygen-avatar.png";
 import timesheetAutomation from "@/assets/projects/timesheet-automation.png";
+import purchaseOrderGenerator from "@/assets/projects/purchase-order-generator.png";
+import jobEstimateQuoteGenerator from "@/assets/projects/job-estimate-quote-generator.png";
 
 type Project = {
   title: string;
@@ -28,63 +30,81 @@ const data: Record<"N8N" | "Make" | "Zapier", Project[]> = {
     {
       title: "Timesheet Automation",
       image: timesheetAutomation,
-      challenge: "Employee timesheet collection, manager approvals, and PDF generation involve manual chasing, duplicate submissions, and inconsistent record-keeping.",
-      solution: "End-to-end n8n workflow with Typeform intake, signature verification, duplicate detection, manager approval routing, automated PDF generation, Gmail notifications, and scheduled reminders for pending approvals.",
-      result: "Fully automated timesheet lifecycle — from submission to approval to archived PDF — with zero manual follow-ups.",
+      challenge: "Employees submitted duplicate timesheets, managers chased approvals manually, and PDFs were generated inconsistently with no central record.",
+      solution: "Typeform intake feeds an n8n workflow that checks for duplicates, routes to the manager for approval, generates a signed PDF, and archives it.",
+      result: "Timesheets go from submission to archived PDF without any manual steps.",
       tags: ["n8n", "Typeform", "Gmail", "Google Sheets"],
-      link: "#",
+      link: "https://drive.google.com/drive/folders/1yq7wxaeef5Vbo5NCTR_GsiS7rfXfTVJy?usp=sharing",
+    },
+    {
+      title: "Job Estimate & Quote Generator",
+      image: jobEstimateQuoteGenerator,
+      challenge: "Construction quotes were written manually and sent late, with no system to follow up on proposals that hadn't been opened.",
+      solution: "A client enquiry triggers n8n to generate a Claude AI quote, produce a PDF, assign the lead, and send a 48-hour follow-up.",
+      result: "Quotes reach clients in under 60 seconds, with every lead assigned and a follow-up already scheduled.",
+      tags: ["n8n", "Claude AI", "PDF", "CRM"],
+      link: "https://drive.google.com/drive/folders/1loobJ4_DCkTAYUKsYZdw1vKz4uDuH973?usp=sharing",
+    },
+    {
+      title: "Purchase Order Generator",
+      image: purchaseOrderGenerator,
+      challenge: "POs were created manually in documents, emailed for approval, and entered into Xero by hand with no audit trail.",
+      solution: "A Typeform submission triggers n8n to generate a PDF, route it for one-click approval, and create the Xero bill on confirmation.",
+      result: "A submitted PO is approved and recorded in Xero without any manual data entry.",
+      tags: ["n8n", "Typeform", "Xero", "PDF"],
+      link: "https://drive.google.com/drive/folders/1V5KdALFFzAKjc-bi9SFVTlBJAMOl7EFi",
     },
     {
       title: "AI Client Onboarding",
       image: clientOnboarding,
-      challenge: "Manual client onboarding (Drive folders, permissions, Airtable logging, welcome emails) is slow, inconsistent, and error-prone.",
-      solution: "n8n workflow triggered by intake form that auto-creates Google Drive folder, logs client in Airtable, generates personalized email with Gemini 2.5 Flash, sends via Gmail, and notifies team in Slack.",
-      result: "Full onboarding in seconds — completely hands-off.",
+      challenge: "Each new client required manually creating a Drive folder, logging details in Airtable, and drafting a welcome email from scratch.",
+      solution: "An intake form triggers n8n to create a Drive folder, log to Airtable, write a Gemini-drafted welcome email, and ping Slack.",
+      result: "A new client is fully set up in seconds, from folder to welcome email, with no manual work.",
       tags: ["n8n", "Airtable", "Gemini", "Slack"],
       link: "https://drive.google.com/drive/folders/1HDBH6ESJaduORY21HV1x4MpaY2T5PBGg?usp=sharing",
     },
     {
       title: "HeyGen v3 Avatar Video Creation",
       image: heygenAvatar,
-      challenge: "Manual script writing, HeyGen video creation, and client notification is slow and doesn't scale.",
-      solution: "n8n workflow that polls Google Sheets every 5 mins, enhances script with Gemini, submits to HeyGen v3 API, and auto-emails the video when ready.",
-      result: "End-to-end automated video production with zero manual work.",
+      challenge: "Every video required manually writing the script, submitting it to HeyGen, then emailing the client when it was done.",
+      solution: "n8n polls Google Sheets every 5 minutes, refines the script with Gemini, submits to HeyGen's v3 API, and emails the video on completion.",
+      result: "A script in Google Sheets becomes a delivered video in the client's inbox with no manual steps.",
       tags: ["n8n", "HeyGen", "Gemini", "Gmail"],
       link: "https://drive.google.com/drive/folders/1lemUqqDrronkm0nrmdtVYQHHbbUjRgKX?usp=sharing",
     },
     {
       title: "Facebook AI Agent",
       image: fb,
-      challenge: "Facebook Page managers can't reply to every employee message at scale.",
-      solution: "n8n workflow with Gemini AI Agent that auto-replies using the Employee Handbook via Graph API.",
-      result: "Instant, accurate answers on Facebook Messenger 24/7 — zero human effort.",
+      challenge: "The Facebook Page received too many employee messages to answer individually, leaving questions unanswered for hours.",
+      solution: "n8n connects Facebook's Graph API to a Gemini agent trained on the Employee Handbook, which reads each message and replies instantly.",
+      result: "Every employee message on Facebook Messenger gets an accurate, policy-grounded reply within seconds, around the clock.",
       tags: ["AI Agent", "Facebook", "Gemini", "Webhooks"],
       link: "https://drive.google.com/drive/folders/1dV3HeDOSxpnL_FZY-zpK25G3kcMoQXcq",
     },
     {
       title: "AI Job Scraper + Resume Optimizer",
       image: scraper,
-      challenge: "Manually searching for jobs, tailoring resumes, and writing proposals is time-consuming and scales poorly.",
-      solution: "An n8n workflow triggered by a Slack message that searches jobs, filters listings, and uses AI to generate a tailored resume, Upwork proposal, and Gmail draft per job.",
-      result: "A single Slack message kicks off a full job search pipeline — tailored resume, proposal, and email draft per relevant job.",
+      challenge: "Finding relevant jobs, rewriting the resume for each one, and drafting an Upwork proposal took several hours per application.",
+      solution: "A Slack command triggers n8n to scrape listings, filter by fit, and output a tailored resume, Upwork proposal, and Gmail draft per job.",
+      result: "One Slack message produces a complete application package for every matching job.",
       tags: ["Slack", "AI", "Gmail", "Upwork"],
       link: "https://drive.google.com/drive/folders/1FznwLW3gFsNmoeH-p0hyHX1p1Kolxfqb?usp=sharing",
     },
     {
       title: "VAPI AI Receptionist",
       image: vapi,
-      challenge: "Clinic staff spend significant time on routine inbound calls for scheduling, rescheduling, and cancellations.",
-      solution: "A VAPI voice AI receptionist that handles inbound calls end-to-end, managing the full appointment lifecycle via n8n sub-workflows connected to Google Calendar and Airtable.",
-      result: "The clinic's phone line is handled 24/7 by an AI that books, reschedules, and cancels appointments — fully synced and logged.",
+      challenge: "Clinic staff handled every inbound call manually, including routine bookings, reschedules, and cancellations.",
+      solution: "VAPI handles inbound calls end-to-end through n8n sub-workflows that check Google Calendar availability and log every appointment in Airtable.",
+      result: "The clinic's phone line books, reschedules, and cancels appointments 24/7 with no staff involvement.",
       tags: ["VAPI", "Voice AI", "Google Calendar", "Airtable"],
       link: "https://drive.google.com/drive/folders/1qq5T9ElYNK5LoaaX_LP0FzHoGbJQUFE6?usp=sharing",
     },
     {
       title: "Supabase RAG Agent",
       image: supa,
-      challenge: "Teams need to ask questions of an ever-changing document library without manually re-indexing.",
-      solution: "An n8n RAG agent that watches Google Drive, embeds documents into Supabase pgvector, and answers questions via Gemini.",
-      result: "Always-current knowledge base with natural-language Q&A — files are auto-synced on create, update, and delete.",
+      challenge: "Staff couldn't query the document library without searching manually, and new files weren't reflected until someone re-indexed them.",
+      solution: "n8n watches Google Drive for file changes, embeds updated content into Supabase pgvector, and routes natural-language questions to Gemini for answers.",
+      result: "Any file added or updated in Drive is immediately queryable in plain English.",
       tags: ["Supabase", "RAG", "Gemini", "Google Drive"],
       link: "https://drive.google.com/drive/folders/1OyA5yZEfvvH_Gg-m_bQ335noqT5jTujg",
     },
@@ -93,18 +113,18 @@ const data: Record<"N8N" | "Make" | "Zapier", Project[]> = {
     {
       title: "Xero → Asana Transactions Export",
       image: xero,
-      challenge: "Finance team manually exported Xero transactions and uploaded them to Asana for client review.",
-      solution: "A Make scenario that watches completed Asana tasks, pulls Xero transactions via API, writes a CSV to Sheets, and attaches it back to Asana.",
-      result: "Zero-touch monthly reporting — transactions flow from Xero to the right Asana task automatically.",
+      challenge: "The finance team manually exported Xero transactions and attached them to Asana tasks every reporting cycle.",
+      solution: "Make watches for completed Asana tasks, pulls matching Xero transactions, exports them to a Google Sheets CSV, and attaches the file back.",
+      result: "Transaction reports attach themselves to the right Asana task the moment it's completed.",
       tags: ["Make", "Xero", "Asana", "Google Sheets"],
       link: "https://drive.google.com/drive/folders/1bU98ZFiZC5DJP_NSmzac0sTTGqMXjYs2",
     },
     {
       title: "Sort Gmail Attachments to Drive",
       image: gmail,
-      challenge: "Important attachments were getting lost in the inbox and never filed properly.",
-      solution: "A Make scenario that watches Gmail, uses AI to classify each attachment, uploads to the right Drive folder, and logs it to Sheets.",
-      result: "Every attachment is automatically named, filed, and logged — with an email confirmation to the team.",
+      challenge: "Attachments arrived in Gmail with inconsistent names and were never filed, making them hard to find later.",
+      solution: "Make watches Gmail for new attachments, classifies each with AI, renames the file, uploads it to the correct Drive folder, and logs the entry.",
+      result: "Every email attachment is filed and logged automatically, with the team notified by email.",
       tags: ["Make", "Gmail", "Google Drive", "AI"],
       link: "https://drive.google.com/drive/folders/1VSIdLcL_sleHcUrjTcrIUXJ-4AzUI3l5",
     },
@@ -113,27 +133,27 @@ const data: Record<"N8N" | "Make" | "Zapier", Project[]> = {
     {
       title: "Automated Lead Enrichment",
       image: leads,
-      challenge: "Inbound leads arrived with minimal info and weren't being prioritized or routed correctly.",
-      solution: "A Zap that catches the lead webhook, enriches via Apollo, splits by priority, logs high-priority to Sheets, and notifies Sales on Slack + Gmail.",
-      result: "Sales gets enriched, prioritized leads in real time — with AI-drafted first-touch emails ready to send.",
+      challenge: "Inbound leads came in with only an email address and were sent to sales with no context on who the prospect was.",
+      solution: "A lead webhook triggers enrichment via Apollo, splits by priority, logs high-value contacts to Sheets, and pings sales on Slack and Gmail.",
+      result: "Sales receives an enriched, prioritized lead with a drafted first-touch email within seconds of sign-up.",
       tags: ["Zapier", "Apollo", "Slack", "Gmail"],
       link: "https://drive.google.com/drive/folders/1vVZ5w9d0hj65GY7eEHxQb-UfAt3QOtaY",
     },
     {
       title: "AI Content Repurposing",
       image: content,
-      challenge: "Long-form content (videos, audio) wasn't being repurposed into social posts consistently.",
-      solution: "A Zap that watches Drive for new files, transcribes with AI, generates blog posts, then loops to publish on Facebook & LinkedIn.",
-      result: "One uploaded file → blog post + multi-platform social posts, fully automated.",
+      challenge: "Podcast episodes and videos sat in Drive without being turned into social posts or blog content.",
+      solution: "A new file in Drive triggers a Zap that transcribes the audio, writes a blog post, then publishes to Facebook and LinkedIn.",
+      result: "One uploaded file becomes a blog post and social content across two platforms with no extra work.",
       tags: ["Zapier", "AI", "Facebook", "LinkedIn"],
       link: "https://drive.google.com/drive/folders/1isoAWBxbNH8isb9Wg3diR53E75oQ50PP",
     },
     {
       title: "Asana CRM Lead Engagement",
       image: asana,
-      challenge: "Leads sat in Asana without consistent follow-up across the sales lifecycle.",
-      solution: "A multi-path Zap that splits leads by stage (Ready, No Response, Quoted, Approved, Paid) and triggers the right Gmail / Drive / Asana actions for each.",
-      result: "Every lead gets the right follow-up at the right time — with welcome emails, quotes, and onboarding all automated.",
+      challenge: "Leads moved through Asana stages without triggering any follow-up actions, so quotes and onboarding steps were handled manually or missed.",
+      solution: "A Zap watches each lead's Asana stage and triggers the correct Gmail, Drive, or Asana action for Ready, Quoted, Approved, and Paid states.",
+      result: "Every lead gets the right action at the right stage without the sales team touching it manually.",
       tags: ["Zapier", "Asana", "Gmail", "CRM"],
       link: "https://drive.google.com/drive/folders/1nqX0YsunL_ECOQDVUfl9PN7FR7BYlIDA?usp=sharing",
     },
@@ -219,14 +239,14 @@ export function Works() {
                 <button
                   type="button"
                   onClick={() => setLightbox({ src: p.image, title: p.title })}
-                  className="group relative aspect-[16/11] shrink-0 overflow-hidden bg-background/50 cursor-zoom-in p-4"
+                  className="group relative h-[220px] shrink-0 overflow-hidden cursor-zoom-in"
                   aria-label={`Expand ${p.title} image`}
                 >
                   <img
                     src={p.image}
                     alt={p.title}
                     loading="lazy"
-                    className="w-full h-full object-contain transition group-hover:scale-[1.03]"
+                    className="w-full h-full object-cover transition group-hover:scale-[1.03]"
                   />
                   <span className="absolute top-3 right-3 grid place-items-center w-9 h-9 rounded-full bg-background/80 backdrop-blur text-primary opacity-0 group-hover:opacity-100 transition">
                     <Maximize2 size={16} />
