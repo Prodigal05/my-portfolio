@@ -14,10 +14,15 @@ import heygenAvatar from "@/assets/projects/heygen-avatar.png";
 import timesheetAutomation from "@/assets/projects/timesheet-automation.png";
 import purchaseOrderGenerator from "@/assets/projects/purchase-order-generator.png";
 import jobEstimateQuoteGenerator from "@/assets/projects/job-estimate-quote-generator.png";
+import hrOnboarding from "@/assets/projects/hr-onboarding.png";
+import hrPostOfferProcess from "@/assets/projects/hr-post-offer-process.png";
+import incidentReport from "@/assets/projects/incident-report.png";
+import incidentReportPoller from "@/assets/projects/incident-report-poller.png";
 
 type Project = {
   title: string;
   image: string;
+  images?: string[];
   challenge: string;
   solution: string;
   result: string;
@@ -27,6 +32,26 @@ type Project = {
 
 const data: Record<"N8N" | "Make" | "Zapier", Project[]> = {
   N8N: [
+    {
+      title: "Incident Report",
+      image: incidentReport,
+      images: [incidentReportPoller],
+      challenge: "Construction sites rely on paper-based or email-driven incident reporting slow, inconsistent, and impossible to track. Safety officers have no visibility into report status, and reporters receive no acknowledgement after submission.",
+      solution: "Processes incident submissions through 5-layer webhook security, uses Claude AI to generate structured reports, and delivers PDFs automatically. A separate status poller runs every minute and notifies all stakeholders when a report moves to Under Review or Closed.",
+      result: "A formal AI-generated incident report is delivered to the reporter within seconds of submission. Every stakeholder is notified automatically at each status transition zero manual follow-up required.",
+      tags: ["Claude AI", "Webhook Security", "PDF"],
+      link: "https://drive.google.com/drive/folders/1bjQK4ikEQSEYr-U45RM89rl124oiSvNk?usp=sharing",
+    },
+    {
+      title: "HR Onboarding",
+      image: hrOnboarding,
+      images: [hrPostOfferProcess],
+      challenge: "HR teams drafted offer letters and onboarding packs by hand for every new hire, then tracked candidate responses manually with no visibility into pending or expiring offers.",
+      solution: "Generates AI-written offer letters, routes them through HR approval with a 72-hour timeout alert, and delivers both offer letter and onboarding pack PDFs automatically. A separate post-offer workflow handles candidate responses across three paths one-click webhooks, Gmail NLP classification, and an hourly expiry monitor.",
+      result: "Offer letters and onboarding packs are generated and delivered after a single HR approval click. Candidate responses are tracked in real time, expired offers flagged automatically, and HR alerted immediately if no action is taken within 72 hours.",
+      tags: ["Claude AI", "Gmail", "PDF"],
+      link: "https://drive.google.com/drive/folders/1sNJzgbV8CqjMl_ltHZvGrCtYIqggauAQ?usp=sharing",
+    },
     {
       title: "Timesheet Automation",
       image: timesheetAutomation,
@@ -166,7 +191,7 @@ const PAGE_SIZE = 3;
 export function Works() {
   const [tab, setTab] = useState<(typeof tabs)[number]>("N8N");
   const [page, setPage] = useState(0);
-  const [lightbox, setLightbox] = useState<{ src: string; title: string } | null>(null);
+  const [lightbox, setLightbox] = useState<{ images: string[]; index: number; title: string } | null>(null);
   const projects = data[tab];
   const totalPages = Math.max(1, Math.ceil(projects.length / PAGE_SIZE));
   const visible = projects.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE);
@@ -175,7 +200,15 @@ export function Works() {
 
   useEffect(() => {
     if (!lightbox) return;
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setLightbox(null); };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightbox(null);
+      if (e.key === "ArrowLeft") {
+        setLightbox((lb) => lb && { ...lb, index: (lb.index - 1 + lb.images.length) % lb.images.length });
+      }
+      if (e.key === "ArrowRight") {
+        setLightbox((lb) => lb && { ...lb, index: (lb.index + 1) % lb.images.length });
+      }
+    };
     window.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
     return () => {
@@ -238,7 +271,7 @@ export function Works() {
               >
                 <button
                   type="button"
-                  onClick={() => setLightbox({ src: p.image, title: p.title })}
+                  onClick={() => setLightbox({ images: [p.image, ...(p.images ?? [])], index: 0, title: p.title })}
                   className="group relative h-[220px] shrink-0 overflow-hidden cursor-zoom-in"
                   aria-label={`Expand ${p.title} image`}
                 >
@@ -341,16 +374,39 @@ export function Works() {
           >
             <X size={20} />
           </button>
+          {lightbox.images.length > 1 && (
+            <>
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); setLightbox({ ...lightbox, index: (lightbox.index - 1 + lightbox.images.length) % lightbox.images.length }); }}
+                aria-label="Previous image"
+                className="absolute left-4 top-1/2 -translate-y-1/2 grid place-items-center w-11 h-11 rounded-full bg-card border border-border text-foreground hover:text-primary hover:border-primary transition"
+              >
+                <ChevronLeft size={20} />
+              </button>
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); setLightbox({ ...lightbox, index: (lightbox.index + 1) % lightbox.images.length }); }}
+                aria-label="Next image"
+                className="absolute right-4 top-1/2 -translate-y-1/2 grid place-items-center w-11 h-11 rounded-full bg-card border border-border text-foreground hover:text-primary hover:border-primary transition"
+              >
+                <ChevronRight size={20} />
+              </button>
+            </>
+          )}
           <figure
             className="max-w-[95vw] max-h-[90vh] flex flex-col items-center gap-3"
             onClick={(e) => e.stopPropagation()}
           >
             <img
-              src={lightbox.src}
+              src={lightbox.images[lightbox.index]}
               alt={lightbox.title}
               className="max-w-full max-h-[82vh] object-contain rounded-xl border border-border shadow-glow"
             />
-            <figcaption className="text-sm text-muted-foreground">{lightbox.title}</figcaption>
+            <figcaption className="text-sm text-muted-foreground">
+              {lightbox.title}
+              {lightbox.images.length > 1 && ` (${lightbox.index + 1}/${lightbox.images.length})`}
+            </figcaption>
           </figure>
         </div>
       )}
