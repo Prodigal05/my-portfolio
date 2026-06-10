@@ -2,6 +2,7 @@
 // Icons (or use a different slug), so we use their official favicon/CDN.
 import freshdeskLogo from "@/assets/logos/freshdesk.webp";
 import gohighlevelLogo from "@/assets/logos/gohighlevel.jpeg";
+import servicenowLogo from "@/assets/logos/servicenow.png";
 
 type Tool = { name: string; src: string };
 
@@ -18,10 +19,17 @@ const tools: Tool[] = [
   { name: "GoHighLevel", src: gohighlevelLogo },
   { name: "Freshdesk", src: freshdeskLogo },
   { name: "Claude", src: si("claude") },
+  { name: "Gemini", src: si("googlegemini") },
   { name: "OpenRouter", src: si("openrouter") },
   { name: "HubSpot", src: si("hubspot") },
   { name: "ClickUp", src: si("clickup") },
   { name: "HeyGen", src: "https://www.heygen.com/favicon.ico" },
+  { name: "Typeform", src: si("typeform") },
+  { name: "Xero", src: si("xero") },
+  { name: "Apollo", src: "https://www.apollo.io/favicon.ico" },
+  { name: "Zendesk", src: si("zendesk") },
+  { name: "ServiceNow", src: servicenowLogo },
+  { name: "Genesys", src: "https://www.genesys.com/favicon.ico" },
 ];
 
 export function LogoMarquee() {

@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Download } from "lucide-react";
 import portrait from "@/assets/francis-portrait.jpg";
 
 export function Hero() {
@@ -40,6 +40,13 @@ export function Hero() {
               className="inline-flex items-center rounded-xl border-2 border-primary px-[1.87rem] py-[0.85rem] text-[1rem] font-semibold text-primary hover:bg-primary/10 transition"
             >
               View My Work
+            </a>
+            <a
+              href="/Francis_Galo_Resume.pdf"
+              download
+              className="inline-flex items-center gap-2 rounded-xl border-2 border-primary px-[1.87rem] py-[0.85rem] text-[1rem] font-semibold text-primary hover:bg-primary/10 transition"
+            >
+              <Download size={18} /> Download Resume
             </a>
           </div>
         </div>
