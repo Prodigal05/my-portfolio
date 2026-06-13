@@ -7,7 +7,8 @@ const links = [
   { href: "#services", label: "Services" },
   { href: "#works", label: "Projects" },
   { href: "#certificates", label: "Certificates" },
-  { href: "#testimonials", label: "Testimonials" },
+  // Temporarily hidden — restore alongside <Testimonials /> in routes/index.tsx.
+  // { href: "#testimonials", label: "Testimonials" },
   { href: "#contact", label: "Contact" },
 ];
 

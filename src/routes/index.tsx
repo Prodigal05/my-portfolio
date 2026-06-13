@@ -6,7 +6,8 @@ import { Process } from "@/components/Process";
 import { Services } from "@/components/Services";
 import { Works } from "@/components/Works";
 import { Certificates } from "@/components/Certificates";
-import { Testimonials } from "@/components/Testimonials";
+// Temporarily hidden — restore by uncommenting this import and <Testimonials /> below.
+// import { Testimonials } from "@/components/Testimonials";
 import { ScheduleCall } from "@/components/ScheduleCall";
 import { Contact } from "@/components/Contact";
 
@@ -24,7 +25,7 @@ function Index() {
       <Services />
       <Works />
       <Certificates />
-      <Testimonials />
+      {/* <Testimonials /> */}
       <ScheduleCall />
       <Contact />
     </main>
